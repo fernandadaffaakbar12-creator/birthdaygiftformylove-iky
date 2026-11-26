@@ -581,112 +581,966 @@ body {
 }
 
 /* =========================================
-   KAROUSEL 3D (Slide 3 - Tentangmu)
+   THE LITTLE THINGS (Interactive 3D Keepsake Deck & Bento)
 ========================================= */
-.solar-system {
+.little-things-section {
+    position: relative;
+    max-width: 720px;
+}
+
+.lt-heading {
+    line-height: 0.85;
+    margin-bottom: 14px;
+    color: #8c1b44;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 14px rgba(255, 255, 255, 0.85);
+}
+
+.lt-heading-main {
+    font-size: 2em;
+    display: block;
+}
+
+.lt-heading-sub {
+    font-size: 1.2em;
+    display: block;
+    opacity: 0.95;
+    transform: translateX(36px);
+    color: #0c2d47;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 10px rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+}
+
+.lt-subtitle {
+    font-size: 0.92rem;
+    color: #0d2e49;
+    font-weight: 500;
+    max-width: 440px;
+    margin: 12px auto 18px auto;
+    line-height: 1.5;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.92), 0 0 10px rgba(255, 255, 255, 0.75);
+}
+
+/* --- Baris Konstelasi 6 Charm --- */
+.lt-constellation-wrap {
+    max-width: 430px;
+    margin: 0 auto 24px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lt-constellation {
     position: relative;
     width: 100%;
-    height: 500px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    perspective: 1400px;
-    overflow: visible;
-    margin-top: 20px;
+    padding: 4px 6px;
 }
 
-/* Lintasan Orbit yang Berputar */
-.orbit-track {
+.lt-constellation-line {
     position: absolute;
-    width: 195px;
-    height: 295px;
-    transform-style: preserve-3d;
-    animation: spin-orbit 25s linear infinite;
-    z-index: 1;
-    will-change: transform;
+    left: 26px;
+    right: 26px;
+    top: 50%;
+    height: 3px;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.52);
+    border-radius: 99px;
+    overflow: hidden;
+    z-index: 0;
+    box-shadow: 0 1px 6px rgba(0, 40, 75, 0.12);
 }
 
-.orbit-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes spin-orbit {
-    0% {
-        transform: rotateY(0deg);
-    }
-
-    100% {
-        transform: rotateY(-360deg);
-    }
-}
-
-/* Desain Bingkai Foto (Planet) */
-.planet-card {
-    position: absolute;
-    top: 0;
-    left: 0;
+.lt-constellation-line-fill {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.50), rgba(255, 255, 255, 0.30));
-    backdrop-filter: blur(10px) saturate(135%);
-    -webkit-backdrop-filter: blur(10px) saturate(135%);
-    border: 1.5px solid rgba(255, 255, 255, 0.82);
-    border-radius: 16px;
-    padding: 15px;
+    background: linear-gradient(90deg, #8c1b44, #d6336c, #ff85a1);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lt-charm {
+    position: relative;
+    z-index: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(235, 248, 255, 0.72));
+    box-shadow: 0 6px 16px rgba(6, 45, 80, 0.16), inset 0 1px 2px #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    padding: 0;
+    outline: none;
+}
+
+.lt-charm:hover {
+    transform: translateY(-3px) scale(1.08);
+}
+
+.lt-charm.is-current {
+    transform: scale(1.16);
+    border-color: #8c1b44;
+    background: linear-gradient(145deg, #ffffff, #ffeef4);
+    box-shadow: 0 0 0 4px rgba(140, 27, 68, 0.18), 0 8px 22px rgba(140, 27, 68, 0.28);
+}
+
+.lt-charm.is-unlocked {
+    border-color: rgba(140, 27, 68, 0.65);
+    background: linear-gradient(145deg, #fff9fb, #ffe4ee);
+}
+
+.lt-charm-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.lt-charm-check {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8c1b44, #d6336c);
+    color: #ffffff;
+    font-size: 0.62rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(140, 27, 68, 0.35);
+    transform: scale(0);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+
+.lt-charm.is-unlocked .lt-charm-check {
+    transform: scale(1);
+}
+
+.lt-progress-pill {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.74);
+    border: 1.5px solid rgba(255, 255, 255, 0.92);
+    box-shadow: 0 4px 14px rgba(6, 42, 74, 0.12);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0e2d47;
+    transition: all 0.4s ease;
+}
+
+.lt-progress-pill.all-unlocked {
+    background: linear-gradient(135deg, #8c1b44, #b8295c);
+    color: #ffffff;
+    border-color: rgba(255, 225, 236, 0.9);
+    box-shadow: 0 6px 20px rgba(140, 27, 68, 0.35);
+}
+
+/* --- Panggung Deck Kartu 3D --- */
+.lt-deck-wrapper {
+    width: 100%;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.lt-deck-stage {
+    position: relative;
+    width: 100%;
+    max-width: 390px;
+    height: 415px;
+    margin: 0 auto;
+    perspective: 1300px;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.lt-burst-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+    overflow: visible;
+}
+
+.lt-burst-particle {
+    position: absolute;
+    left: 50%;
+    top: 56%;
+    font-size: 1.1rem;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: ltParticleFly 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes ltParticleFly {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+    }
+    70% {
+        opacity: 0.95;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.25) rotate(var(--rot));
+    }
+}
+
+/* --- Kartu Individual dalam Stack --- */
+.lt-card {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center bottom;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+    will-change: transform, opacity;
+}
+
+.lt-card[data-pos="0"] {
+    z-index: 5;
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    pointer-events: auto;
+}
+
+.lt-card[data-pos="1"] {
+    z-index: 4;
+    opacity: 0.9;
+    transform: translate3d(11px, 12px, -30px) scale(0.95) rotate(2.4deg);
+    pointer-events: none;
+}
+
+.lt-card[data-pos="2"] {
+    z-index: 3;
+    opacity: 0.65;
+    transform: translate3d(-11px, 22px, -60px) scale(0.90) rotate(-2.2deg);
+    pointer-events: none;
+}
+
+.lt-card[data-pos="hidden"] {
+    z-index: 1;
+    opacity: 0;
+    transform: translate3d(0, 28px, -90px) scale(0.86);
+    pointer-events: none;
+}
+
+.lt-card.swipe-out-left {
+    z-index: 7;
+    opacity: 0 !important;
+    transform: translate3d(-130%, 16px, 20px) rotate(-14deg) !important;
+    pointer-events: none;
+}
+
+.lt-card.swipe-out-right {
+    z-index: 7;
+    opacity: 0 !important;
+    transform: translate3d(130%, 16px, 20px) rotate(14deg) !important;
+    pointer-events: none;
+}
+
+/* --- 3D Flip Container --- */
+.lt-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: transform 0.78s cubic-bezier(0.34, 1.32, 0.64, 1);
+    cursor: pointer;
+}
+
+.lt-card.is-flipped .lt-card-inner {
+    transform: rotateY(180deg);
+}
+
+.lt-card-face {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 26px;
+    padding: 26px 24px 22px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0, 45, 80, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.85);
-    transition: border-color 0.3s, box-shadow 0.3s;
-    cursor: pointer;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transform: translateZ(0);
+    overflow: hidden;
 }
 
-.planet-card:hover {
-    border-color: #8c1b44;
-    box-shadow: 0 0 25px rgba(140, 27, 68, 0.35);
+/* Pointer events protection across 3D faces for iOS/Android WebKit */
+.lt-card:not(.is-flipped) .lt-card-front {
+    pointer-events: auto;
+}
+.lt-card:not(.is-flipped) .lt-card-back {
+    pointer-events: none;
+}
+.lt-card.is-flipped .lt-card-front {
+    pointer-events: none;
+}
+.lt-card.is-flipped .lt-card-back {
+    pointer-events: auto;
 }
 
-.planet-card img {
+/* --- Sisi Depan (Amplop Kapsul Tersegel) --- */
+.lt-card-front {
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.94) 0%, rgba(240, 250, 255, 0.88) 52%, rgba(255, 236, 244, 0.92) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.96);
+    box-shadow: 0 18px 42px rgba(6, 42, 74, 0.2), inset 0 2px 4px #ffffff;
+    transform: rotateY(0deg);
+}
+
+.lt-card-front::after {
+    content: '';
+    position: absolute;
+    inset: 9px;
+    border-radius: 19px;
+    border: 1px dashed rgba(140, 27, 68, 0.2);
+    pointer-events: none;
+}
+
+.lt-envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.9);
+    height: 120px;
+    background: linear-gradient(180deg, rgba(140, 27, 68, 0.09) 0%, rgba(255, 182, 193, 0.16) 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    pointer-events: none;
 }
 
-.planet-caption {
+.lt-card-badge {
+    position: relative;
+    z-index: 1;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #8c1b44;
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid rgba(140, 27, 68, 0.2);
+    padding: 5px 14px;
+    border-radius: 999px;
+    box-shadow: 0 3px 10px rgba(140, 27, 68, 0.08);
+}
+
+.lt-badge-special {
+    background: linear-gradient(135deg, #fff0f5, #ffe0eb);
+    border-color: rgba(140, 27, 68, 0.35);
+}
+
+.lt-front-illustration {
+    position: relative;
+    z-index: 1;
+    width: 78px;
+    height: 78px;
+    color: #8c1b44;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    animation: ltFloatSlow 3.6s ease-in-out infinite;
+}
+
+.lt-front-illustration svg {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes ltFloatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+.lt-front-question {
+    position: relative;
+    z-index: 1;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.22rem;
+    font-weight: 600;
+    color: #0b2944;
+    line-height: 1.38;
+    padding: 0 8px;
+    text-align: center;
+}
+
+/* --- Segel Lilin 3D (Wax Seal) --- */
+.lt-wax-seal-wrap {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.lt-wax-seal {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #d64072 0%, #9b1d4b 56%, #630d2d 100%);
+    border: 2px dashed rgba(255, 225, 236, 0.55);
+    box-shadow:
+        0 8px 20px rgba(140, 27, 68, 0.38),
+        0 0 0 4px rgba(140, 27, 68, 0.12),
+        inset 0 2px 4px rgba(255, 210, 225, 0.55),
+        inset 0 -3px 6px rgba(45, 4, 20, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ltSealPulse 2.4s ease-in-out infinite;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lt-wax-seal-special {
+    background: radial-gradient(circle at 32% 28%, #ff6b9d 0%, #b51f58 55%, #730f36 100%);
+}
+
+.lt-card-front:hover .lt-wax-seal {
+    transform: scale(1.09);
+    box-shadow:
+        0 10px 25px rgba(140, 27, 68, 0.5),
+        0 0 0 6px rgba(255, 182, 193, 0.32),
+        inset 0 2px 4px rgba(255, 210, 225, 0.65);
+}
+
+.lt-wax-seal-heart {
+    font-size: 1.45rem;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.28));
+}
+
+@keyframes ltSealPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+.lt-seal-hint {
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #8c1b44;
+    letter-spacing: 0.3px;
+    opacity: 0.88;
+}
+
+/* --- Sisi Belakang (Isi Kepingan Terbuka) --- */
+.lt-card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(160deg, rgba(255, 254, 255, 0.97) 0%, rgba(244, 251, 255, 0.94) 50%, rgba(255, 239, 246, 0.96) 100%);
+    border: 2px solid #ffffff;
+    box-shadow: 0 20px 44px rgba(6, 42, 74, 0.22), 0 0 25px rgba(255, 182, 193, 0.28), inset 0 2px 4px #ffffff;
+}
+
+.lt-card-back::before {
+    content: '';
+    position: absolute;
+    inset: 9px;
+    border-radius: 19px;
+    border: 1px solid rgba(140, 27, 68, 0.15);
+    pointer-events: none;
+}
+
+.lt-back-top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.lt-back-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8c1b44;
+    background: rgba(140, 27, 68, 0.08);
+    padding: 4px 11px;
+    border-radius: 999px;
+}
+
+.lt-back-mini-icon {
+    font-size: 1.25rem;
+}
+
+.lt-back-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #3d5a73;
+    margin: 6px 0 0 0 !important;
+    line-height: 1.35 !important;
+    text-shadow: none !important;
+    padding: 0 6px;
+}
+
+.lt-back-divider {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #c9597e;
+    font-size: 0.8rem;
+    margin: 2px 0;
+}
+
+.lt-back-divider::before,
+.lt-back-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(140, 27, 68, 0.28), transparent);
+}
+
+.lt-back-answer {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.14rem !important;
+    font-weight: 600 !important;
+    color: #0b263d !important;
+    line-height: 1.55 !important;
+    padding: 0 8px;
+    margin: 0 !important;
+    text-shadow: none !important;
+}
+
+/* --- Kartu Spesial #06: Panggilan Kesayangan Iky🤍 --- */
+.lt-back-special {
+    background: radial-gradient(circle at 50% 42%, rgba(255, 232, 242, 0.96) 0%, rgba(255, 250, 252, 0.97) 58%, rgba(238, 249, 255, 0.96) 100%);
+}
+
+.lt-nickname-halo {
+    position: relative;
+    padding: 14px 34px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 228, 238, 0.85));
+    border: 2px solid rgba(140, 27, 68, 0.22);
+    box-shadow: 0 10px 28px rgba(140, 27, 68, 0.16), 0 0 25px rgba(255, 182, 193, 0.45);
+    animation: ltHeartbeatHalo 2.4s ease-in-out infinite;
+}
+
+@keyframes ltHeartbeatHalo {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.lt-nickname-text {
+    font-size: 3.4rem !important;
+    color: #8c1b44;
+    line-height: 1.05;
+    display: inline-block;
+    text-shadow: 0 2px 10px rgba(255, 182, 193, 0.55);
+}
+
+.lt-nickname-note {
+    font-size: 0.88rem !important;
+    color: #274966 !important;
+    font-style: italic;
+    margin: 0 !important;
+    line-height: 1.45 !important;
+    padding: 0 12px;
+    text-shadow: none !important;
+}
+
+/* --- Kartu Spesial #07: Your favorite person (Foto) --- */
+.lt-back-photo {
+    background: radial-gradient(circle at 50% 35%, rgba(255, 236, 244, 0.96) 0%, rgba(255, 252, 254, 0.97) 58%, rgba(236, 249, 255, 0.96) 100%);
+    padding: 18px 20px 18px;
+}
+
+.lt-fav-photo-wrap {
+    position: relative;
+    width: 186px;
+    height: 222px;
+    border-radius: 18px;
+    padding: 6px;
+    background: #ffffff;
+    box-shadow: 0 12px 28px rgba(140, 27, 68, 0.2), 0 0 0 1.5px rgba(140, 27, 68, 0.14);
+    cursor: zoom-in;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.lt-fav-photo-wrap:hover {
+    transform: scale(1.03);
+    box-shadow: 0 14px 32px rgba(140, 27, 68, 0.28), 0 0 22px rgba(255, 182, 193, 0.45);
+}
+
+.lt-fav-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 13px;
+    display: block;
+}
+
+.lt-photo-zoom-hint {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(12, 45, 71, 0.72);
+    color: #ffffff;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.lt-photo-caption {
+    font-size: 2.05rem !important;
+    color: #8c1b44 !important;
+    line-height: 1.05 !important;
+    margin: 4px 0 2px 0 !important;
+    text-shadow: 0 1px 8px rgba(255, 182, 193, 0.5) !important;
+}
+
+/* Bento Card Foto #07 */
+.lt-bento-photo-card {
+    text-align: center;
+    background: radial-gradient(circle at 50% 35%, rgba(255, 236, 244, 0.96), rgba(255, 252, 254, 0.95));
+    border-color: rgba(255, 182, 193, 0.9);
+}
+
+.lt-bento-photo-wrap {
+    width: 210px;
+    height: 255px;
+    margin: 6px auto 10px auto;
+    padding: 7px;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 10px 26px rgba(140, 27, 68, 0.18), 0 0 0 1px rgba(140, 27, 68, 0.12);
+    cursor: zoom-in;
+    transition: transform 0.25s ease;
+}
+
+.lt-bento-photo-wrap:hover {
+    transform: scale(1.03);
+}
+
+.lt-bento-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 13px;
+    display: block;
+}
+
+.lt-bento-photo-caption {
+    font-size: 2.2rem !important;
+    color: #8c1b44 !important;
+    margin: 2px 0 6px 0 !important;
+    line-height: 1.1 !important;
+}
+
+/* --- Footer Tombol Reaksi & Selanjutnya di Dalam Kartu --- */
+.lt-back-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 6px;
+    position: relative;
+    z-index: 2;
+}
+
+.lt-footer-center {
+    justify-content: center;
+}
+
+.lt-heart-react-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(140, 27, 68, 0.24);
+    background: rgba(255, 240, 245, 0.9);
+    color: #8c1b44;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lt-heart-react-btn:hover {
+    background: #ffe0eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(140, 27, 68, 0.18);
+}
+
+.lt-heart-react-btn:active {
+    transform: scale(0.93);
+}
+
+.lt-hug-btn {
+    background: linear-gradient(135deg, #8c1b44, #bf2b60);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.6);
+    padding: 9px 20px;
+    font-size: 0.84rem;
+    box-shadow: 0 6px 18px rgba(140, 27, 68, 0.32);
+}
+
+.lt-hug-btn:hover {
+    background: linear-gradient(135deg, #a1204f, #d4356e);
+    color: #ffffff;
+}
+
+.lt-next-chip {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(12, 45, 71, 0.18);
+    background: rgba(12, 45, 71, 0.07);
+    color: #0c2d47;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lt-next-chip:hover {
+    background: #0c2d47;
+    color: #ffffff;
+}
+
+/* --- Navigasi Prev / Next di Bawah Deck --- */
+.lt-deck-controls {
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.lt-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.78);
+    color: #0c2d47;
+    font-size: 1.45rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(6, 42, 74, 0.15);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.lt-nav-btn:hover {
+    background: #ffffff;
+    color: #8c1b44;
+    transform: scale(1.08);
+}
+
+.lt-nav-btn:active {
+    transform: scale(0.94);
+}
+
+.lt-Swipe-indicator {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #0c2d47;
+    background: rgba(255, 255, 255, 0.68);
+    padding: 6px 15px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    box-shadow: 0 3px 10px rgba(6, 42, 74, 0.1);
+}
+
+/* --- Toggle Mode Ringkasan Bento --- */
+.lt-view-toggle-wrap {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+.lt-view-toggle-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #8c1b44;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(255, 236, 244, 0.85));
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    padding: 10px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(6, 42, 74, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.lt-view-toggle-btn:hover {
+    transform: translateY(-2px);
+    background: #ffffff;
+    box-shadow: 0 8px 22px rgba(140, 27, 68, 0.24);
+}
+
+.lt-view-toggle-btn.glow-ready {
+    background: linear-gradient(135deg, #8c1b44, #bd285d);
+    color: #ffffff;
+    border-color: rgba(255, 225, 236, 0.9);
+    box-shadow: 0 8px 24px rgba(140, 27, 68, 0.38);
+}
+
+.hidden-view {
+    display: none !important;
+}
+
+/* --- Bento Summary Grid (Mode Lihat Semua Sekaligus) --- */
+.lt-summary-grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    text-align: left;
+    animation: ltGridFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes ltGridFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.lt-bento-card {
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(242, 250, 255, 0.84));
+    border: 1.5px solid rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 18px 18px;
+    box-shadow: 0 10px 26px rgba(6, 42, 74, 0.15), inset 0 1px 2px #ffffff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lt-bento-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(140, 27, 68, 0.2);
+}
+
+.lt-bento-wide {
+    grid-column: span 2;
+}
+
+.lt-bento-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.lt-bento-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #8c1b44;
+    background: rgba(140, 27, 68, 0.09);
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.lt-bento-emoji {
+    font-size: 1.2rem;
+}
+
+.lt-bento-q {
     font-size: 0.85rem;
     font-weight: 600;
-    font-style: italic;
-    color: #0b2b48;
-    line-height: 1.2;
-    text-shadow: none;
+    color: #3f5d78;
+    margin-bottom: 6px;
+    line-height: 1.35;
 }
 
-/* Jarak Orbit 4 kartu: saling berdekatan namun tidak terlalu rapat (360deg / 4 = 90deg) */
-.item1 {
-    transform: rotateY(0deg) translateZ(195px);
+.lt-bento-a {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: #0b263d !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    text-shadow: none !important;
 }
 
-.item2 {
-    transform: rotateY(72deg) translateZ(195px);
+.lt-bento-special {
+    text-align: center;
+    background: radial-gradient(circle at 50% 40%, rgba(255, 232, 242, 0.96), rgba(255, 250, 253, 0.94));
+    border-color: rgba(255, 182, 193, 0.9);
+    cursor: pointer;
 }
 
-.item3 {
-    transform: rotateY(144deg) translateZ(195px);
+.lt-bento-iky {
+    font-size: 3rem !important;
+    color: #8c1b44 !important;
+    margin: 4px 0 6px 0 !important;
+    line-height: 1.1 !important;
 }
 
-.item4 {
-    transform: rotateY(216deg) translateZ(195px);
+.lt-bento-tap-note {
+    display: inline-block;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: #8c1b44;
+    background: rgba(140, 27, 68, 0.08);
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
-.item5 {
-    transform: rotateY(288deg) translateZ(195px);
+/* Floating Heart Shower saat tombol Cinta ditekan */
+.lt-floating-love {
+    position: fixed;
+    z-index: 99992;
+    pointer-events: none;
+    font-size: 1.35rem;
+    will-change: transform, opacity;
+    animation: ltRiseLove 1.8s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes ltRiseLove {
+    0% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(0.6) rotate(0deg);
+    }
+    50% {
+        opacity: 0.95;
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--drift-x), -145px, 0) scale(1.35) rotate(var(--drift-rot));
+    }
 }
 
 /* =========================================
@@ -1282,59 +2136,81 @@ body {
         -webkit-backdrop-filter: none !important;
     }
 
-    /* --- 3. OPTIMASI KAROUSEL 3D (TENTANGMU) DI MOBILE --- */
-    .solar-system {
-        height: 400px;
-        perspective: 1000px !important;
-        contain: layout paint;
+    /* --- 3. OPTIMASI THE LITTLE THINGS DI MOBILE --- */
+    .little-things-section {
+        padding: 15px 4px !important;
     }
 
-    .orbit-track {
-        width: 155px;
-        height: 235px;
-        transform-style: preserve-3d;
-        will-change: transform;
+    .lt-heading-sub {
+        transform: translateX(24px);
     }
 
-    .planet-card {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.45)) !important;
-        backdrop-filter: none !important; /* SANGAT KRUSIAL: matikan blur pada 5 kartu 3D yang berputar agar 60 FPS */
-        -webkit-backdrop-filter: none !important;
-        box-shadow: 0 6px 18px rgba(0, 45, 80, 0.16), inset 0 1px 1px rgba(255, 255, 255, 0.85) !important;
-        backface-visibility: hidden !important;
-        -webkit-backface-visibility: hidden !important;
-        transform: translateZ(0);
-        padding: 10px 10px 12px 10px !important;
-        border-radius: 14px !important;
+    .lt-subtitle {
+        font-size: 0.84rem;
+        padding: 0 10px;
+        margin-bottom: 16px;
     }
 
-    .planet-card img {
-        margin-bottom: 8px;
+    .lt-constellation-wrap {
+        max-width: 350px;
+        margin-bottom: 20px;
     }
 
-    .planet-caption {
-        font-size: 0.82rem;
+    .lt-charm {
+        width: 36px;
+        height: 36px;
     }
 
-    /* Menyesuaikan jarak orbit 4 kartu di HP (saling berdekatan namun tidak terlalu rapat) */
-    .item1 {
-        transform: rotateY(0deg) translateZ(155px);
+    .lt-charm-icon {
+        font-size: 0.95rem;
     }
 
-    .item2 {
-        transform: rotateY(72deg) translateZ(155px);
+    .lt-fav-photo-wrap {
+        width: 170px;
+        height: 205px;
     }
 
-    .item3 {
-        transform: rotateY(144deg) translateZ(155px);
+    .lt-photo-caption {
+        font-size: 1.85rem !important;
     }
 
-    .item4 {
-        transform: rotateY(216deg) translateZ(155px);
+    .lt-deck-stage {
+        max-width: 335px;
+        height: 395px;
+        perspective: 1050px;
     }
 
-    .item5 {
-        transform: rotateY(288deg) translateZ(155px);
+    .lt-card-face {
+        padding: 22px 18px 18px;
+        border-radius: 22px;
+    }
+
+    .lt-front-question {
+        font-size: 1.1rem;
+    }
+
+    .lt-wax-seal {
+        width: 56px;
+        height: 56px;
+    }
+
+    .lt-back-answer {
+        font-size: 1.04rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .lt-nickname-text {
+        font-size: 3rem !important;
+    }
+
+    .lt-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 4px;
+    }
+
+    .lt-bento-wide {
+        grid-column: span 1;
     }
 
     /* --- 4. TATA LETAK & KONTEN DI HP --- */

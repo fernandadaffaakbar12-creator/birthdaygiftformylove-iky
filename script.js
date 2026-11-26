@@ -521,7 +521,7 @@
         const pinPopupClose = document.getElementById('pin-popup-close');
 
         // DEFAULT PIN: Silakan ubah angka ini jika ingin PIN lain
-        const SECRET_PIN = "2708";
+        const SECRET_PIN = "2505";
 
         let pinAttempt = 0;
         let popupTimeout = null;
@@ -1687,3 +1687,410 @@ function buatConfetti() {
     // Gelombang 3: Hujan confetti lanjutan
     setTimeout(() => burstWave(isMobileConfetti ? 16 : 40, 0), 2000);
 }
+
+// ==========================================
+// THE LITTLE THINGS — INTERACTIVE 3D KEEPSAKE DECK & BENTO
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const section = document.getElementById('little-things-section');
+    if (!section) return;
+
+    const cards = Array.from(section.querySelectorAll('.lt-card'));
+    const charms = Array.from(section.querySelectorAll('.lt-charm'));
+    const lineFill = document.getElementById('lt-line-fill');
+    const progressPill = document.getElementById('lt-progress-pill');
+    const progressText = document.getElementById('lt-progress-text');
+    const stepIndicator = document.getElementById('lt-step-indicator');
+    const prevBtn = document.getElementById('lt-prev-btn');
+    const nextBtn = document.getElementById('lt-next-btn');
+    const deckWrapper = document.getElementById('lt-deck-wrapper');
+    const deckStage = document.getElementById('lt-deck-stage');
+    const burstLayer = document.getElementById('lt-burst-layer');
+    const viewToggleBtn = document.getElementById('lt-view-toggle-btn');
+    const summaryGrid = document.getElementById('lt-summary-grid');
+    const bentoIkyCard = document.getElementById('lt-bento-iky-card');
+
+    const total = cards.length;
+    let currentIndex = 0;
+    let isAnimating = false;
+    let isSummaryMode = false;
+    let celebratedAll = false;
+    const unlockedSet = new Set();
+    const loveCounts = new Array(total).fill(0);
+
+    function updateDeckLayout() {
+        cards.forEach((card, idx) => {
+            card.classList.remove('is-active', 'swipe-out-left', 'swipe-out-right');
+            card.style.transform = '';
+
+            const diff = (idx - currentIndex + total) % total;
+            if (diff === 0) {
+                card.setAttribute('data-pos', '0');
+                card.classList.add('is-active');
+            } else if (diff === 1) {
+                card.setAttribute('data-pos', '1');
+            } else if (diff === 2) {
+                card.setAttribute('data-pos', '2');
+            } else {
+                card.setAttribute('data-pos', 'hidden');
+            }
+        });
+
+        charms.forEach((charm, idx) => {
+            charm.classList.toggle('is-current', idx === currentIndex);
+            charm.classList.toggle('is-unlocked', unlockedSet.has(idx));
+        });
+
+        if (stepIndicator) {
+            const activeCard = cards[currentIndex];
+            const isFlipped = activeCard && activeCard.classList.contains('is-flipped');
+            stepIndicator.textContent = isFlipped
+                ? `${currentIndex + 1} / ${total} • Ketuk untuk balik / geser`
+                : `${currentIndex + 1} / ${total} • Ketuk segel untuk buka`;
+        }
+    }
+
+    function updateProgressUI() {
+        const count = unlockedSet.size;
+        if (lineFill) {
+            lineFill.style.transform = `scaleX(${count / total})`;
+        }
+
+        charms.forEach((charm, idx) => {
+            charm.classList.toggle('is-unlocked', unlockedSet.has(idx));
+        });
+
+        if (progressText) {
+            if (count >= total) {
+                progressText.textContent = 'Semua tentang Iky telah terbuka 🤍';
+            } else {
+                progressText.textContent = `${count} / ${total} kepingan terbuka`;
+            }
+        }
+
+        if (progressPill) {
+            progressPill.classList.toggle('all-unlocked', count >= total);
+        }
+
+        if (viewToggleBtn && !isSummaryMode && count >= total) {
+            viewToggleBtn.classList.add('glow-ready');
+            viewToggleBtn.textContent = `✨ Lihat Semua ${total} Kepingan Sekaligus`;
+        }
+
+        if (count >= total && !celebratedAll) {
+            celebratedAll = true;
+            spawnLoveShower(window.innerWidth / 2, window.innerHeight * 0.55, 16);
+        }
+    }
+
+    function spawnSealBurst() {
+        if (!burstLayer) return;
+        const symbols = ['🤍', '✨', '🌸', '💫', '🤍', '✦'];
+        const count = window.innerWidth <= 768 ? 10 : 14;
+
+        for (let i = 0; i < count; i++) {
+            const el = document.createElement('span');
+            el.className = 'lt-burst-particle';
+            el.textContent = symbols[i % symbols.length];
+
+            const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.35;
+            const dist = 65 + Math.random() * 75;
+            const tx = Math.round(Math.cos(angle) * dist) + 'px';
+            const ty = Math.round(Math.sin(angle) * dist - 15) + 'px';
+            const rot = Math.round((Math.random() - 0.5) * 90) + 'deg';
+
+            el.style.setProperty('--tx', tx);
+            el.style.setProperty('--ty', ty);
+            el.style.setProperty('--rot', rot);
+
+            burstLayer.appendChild(el);
+            setTimeout(() => el.remove(), 950);
+        }
+    }
+
+    function spawnLoveShower(originX, originY, count = 7) {
+        const icons = ['🤍', '🤍', '✨', '💖', '🤍'];
+        for (let i = 0; i < count; i++) {
+            const heart = document.createElement('span');
+            heart.className = 'lt-floating-love';
+            heart.textContent = icons[i % icons.length];
+
+            const offsetX = (Math.random() - 0.5) * 90;
+            const offsetY = (Math.random() - 0.5) * 24;
+            const driftX = Math.round((Math.random() - 0.5) * 110) + 'px';
+            const driftRot = Math.round((Math.random() - 0.5) * 50) + 'deg';
+
+            heart.style.left = (originX + offsetX) + 'px';
+            heart.style.top = (originY + offsetY) + 'px';
+            heart.style.setProperty('--drift-x', driftX);
+            heart.style.setProperty('--drift-rot', driftRot);
+            heart.style.animationDelay = (i * 0.06) + 's';
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2100);
+        }
+    }
+
+    function toggleFlipCard(index) {
+        const card = cards[index];
+        if (!card) return;
+
+        const willOpen = !card.classList.contains('is-flipped');
+        card.classList.toggle('is-flipped', willOpen);
+
+        if (willOpen) {
+            const wasNew = !unlockedSet.has(index);
+            unlockedSet.add(index);
+            spawnSealBurst();
+
+            const badge = card.querySelector('.lt-card-badge');
+            if (badge && !badge.dataset.openedLabel) {
+                badge.dataset.openedLabel = 'true';
+                badge.textContent = badge.textContent + ' • Terbuka';
+            }
+
+            // Efek ekstra manis saat kartu terakhir "Iky🤍" dibuka pertama kali
+            if (index === total - 1 && wasNew) {
+                const rect = card.getBoundingClientRect();
+                spawnLoveShower(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
+            }
+
+            updateProgressUI();
+        }
+
+        if (stepIndicator) {
+            stepIndicator.textContent = willOpen
+                ? `${currentIndex + 1} / ${total} • Ketuk untuk balik / geser`
+                : `${currentIndex + 1} / ${total} • Ketuk segel untuk buka`;
+        }
+    }
+
+    function goToCard(targetIndex, direction = 'next') {
+        if (isAnimating) return;
+        const normalized = (targetIndex + total) % total;
+        if (normalized === currentIndex) return;
+
+        isAnimating = true;
+        const outgoing = cards[currentIndex];
+        if (outgoing) {
+            outgoing.style.transform = '';
+            outgoing.classList.add(direction === 'prev' ? 'swipe-out-right' : 'swipe-out-left');
+        }
+
+        currentIndex = normalized;
+
+        setTimeout(() => {
+            updateDeckLayout();
+            isAnimating = false;
+        }, 280);
+    }
+
+    // Klik & tombol di dalam tiap kartu
+    cards.forEach((card, idx) => {
+        const reactBtn = card.querySelector('.lt-heart-react-btn');
+        if (reactBtn) {
+            reactBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                loveCounts[idx]++;
+                const labelEl = reactBtn.querySelector('.lt-react-count');
+                if (labelEl) {
+                    labelEl.textContent = idx === total - 1
+                        ? `Sayang Iky ×${loveCounts[idx]}`
+                        : `Terkirim ×${loveCounts[idx]}`;
+                }
+                const rect = reactBtn.getBoundingClientRect();
+                spawnLoveShower(
+                    rect.left + rect.width / 2,
+                    rect.top,
+                    idx === total - 1 ? 12 : 6
+                );
+            });
+        }
+
+        const nextChip = card.querySelector('.lt-next-chip');
+        if (nextChip) {
+            nextChip.addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToCard(currentIndex + 1, 'next');
+            });
+        }
+    });
+
+    // Navigasi tombol konstelasi di atas
+    charms.forEach((charm, idx) => {
+        charm.addEventListener('click', () => {
+            if (isSummaryMode) {
+                setSummaryMode(false);
+            }
+            if (idx === currentIndex) {
+                toggleFlipCard(idx);
+            } else {
+                const dir = idx > currentIndex ? 'next' : 'prev';
+                goToCard(idx, dir);
+            }
+        });
+    });
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => goToCard(currentIndex - 1, 'prev'));
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => goToCard(currentIndex + 1, 'next'));
+    }
+
+    // Interaksi Geser (Swipe / Drag) & Ketuk (Tap) pada Deck Stage
+    if (deckStage) {
+        let startX = 0;
+        let startY = 0;
+        let currentDX = 0;
+        let pointerActive = false;
+        let isHorizontalDrag = false;
+
+        deckStage.addEventListener('pointerdown', (e) => {
+            if (isAnimating) return;
+            if (e.target.closest('button') || e.target.closest('.lt-fav-photo-wrap')) return;
+            pointerActive = true;
+            isHorizontalDrag = false;
+            startX = e.clientX;
+            startY = e.clientY;
+            currentDX = 0;
+        });
+
+        window.addEventListener('pointermove', (e) => {
+            if (!pointerActive) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            if (!isHorizontalDrag) {
+                if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy) * 1.15) {
+                    isHorizontalDrag = true;
+                } else if (Math.abs(dy) > 14) {
+                    // Biarkan halaman scroll vertikal dengan mulus
+                    pointerActive = false;
+                    return;
+                }
+            }
+
+            if (isHorizontalDrag) {
+                currentDX = dx;
+                const activeCard = cards[currentIndex];
+                if (activeCard) {
+                    activeCard.style.transition = 'none';
+                    const rot = Math.max(-14, Math.min(14, dx * 0.045));
+                    activeCard.style.transform = `translate3d(${dx * 0.85}px, ${Math.abs(dx) * 0.04}px, 0) rotate(${rot}deg)`;
+                }
+            }
+        }, { passive: true });
+
+        function cancelPointer() {
+            if (!pointerActive) return;
+            pointerActive = false;
+            const activeCard = cards[currentIndex];
+            if (activeCard) {
+                activeCard.style.transition = '';
+                activeCard.style.transform = '';
+            }
+        }
+
+        function finishPointer(e) {
+            if (!pointerActive) return;
+            pointerActive = false;
+
+            const activeCard = cards[currentIndex];
+            if (activeCard) {
+                activeCard.style.transition = '';
+            }
+
+            if (isHorizontalDrag) {
+                if (currentDX < -55) {
+                    goToCard(currentIndex + 1, 'next');
+                } else if (currentDX > 55) {
+                    goToCard(currentIndex - 1, 'prev');
+                } else if (activeCard) {
+                    activeCard.style.transform = '';
+                }
+            } else {
+                const endX = e && typeof e.clientX === 'number' ? e.clientX : startX;
+                const endY = e && typeof e.clientY === 'number' ? e.clientY : startY;
+                if (Math.hypot(endX - startX, endY - startY) < 12) {
+                    toggleFlipCard(currentIndex);
+                } else if (activeCard) {
+                    activeCard.style.transform = '';
+                }
+            }
+        }
+
+        window.addEventListener('pointerup', finishPointer);
+        window.addEventListener('pointercancel', cancelPointer);
+    }
+
+    // Mode Toggle: Mode Kartu 3D <-> Mode Ringkasan Bento Semua Kepingan
+    function setSummaryMode(enableSummary) {
+        isSummaryMode = enableSummary;
+        if (!deckWrapper || !summaryGrid || !viewToggleBtn) return;
+
+        if (isSummaryMode) {
+            // Tandai semua terbuka saat melihat ringkasan penuh
+            for (let i = 0; i < total; i++) {
+                unlockedSet.add(i);
+                cards[i].classList.add('is-flipped');
+            }
+            updateProgressUI();
+
+            deckWrapper.classList.add('hidden-view');
+            summaryGrid.classList.remove('hidden-view');
+            viewToggleBtn.classList.remove('glow-ready');
+            viewToggleBtn.textContent = '🃏 Kembali ke Mode Kartu 3D';
+        } else {
+            summaryGrid.classList.add('hidden-view');
+            deckWrapper.classList.remove('hidden-view');
+            updateDeckLayout();
+            viewToggleBtn.textContent = unlockedSet.size >= total
+                ? `✨ Lihat Semua ${total} Kepingan Sekaligus`
+                : '📖 Lihat Semua Kepingan Sekaligus';
+            if (unlockedSet.size >= total) {
+                viewToggleBtn.classList.add('glow-ready');
+            }
+        }
+    }
+
+    if (viewToggleBtn) {
+        viewToggleBtn.addEventListener('click', () => {
+            setSummaryMode(!isSummaryMode);
+        });
+    }
+
+    if (bentoIkyCard) {
+        bentoIkyCard.addEventListener('click', () => {
+            const rect = bentoIkyCard.getBoundingClientRect();
+            spawnLoveShower(rect.left + rect.width / 2, rect.top + rect.height / 2, 14);
+        });
+    }
+
+    // Lightbox saat mengetuk foto "Your favorite person" (baik di kartu 3D maupun Bento)
+    const favPhotoTriggers = section.querySelectorAll('[data-lightbox-src]');
+    favPhotoTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalIframe = document.getElementById('modal-iframe');
+            const modalCaption = document.getElementById('modal-caption');
+            if (!modal || !modalImg) return;
+
+            if (modalIframe) {
+                modalIframe.style.display = 'none';
+                modalIframe.src = '';
+            }
+            modalImg.style.display = 'block';
+            modalImg.src = trigger.getAttribute('data-lightbox-src');
+            modalImg.style.aspectRatio = '3 / 4';
+            if (modalCaption) {
+                modalCaption.innerText = trigger.getAttribute('data-lightbox-caption') || 'Your favorite person';
+            }
+            modal.classList.add('show-modal');
+        });
+    });
+
+    updateDeckLayout();
+});

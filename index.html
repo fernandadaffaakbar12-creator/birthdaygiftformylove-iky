@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Happy Birthday My Love Natasya!</title>
+    <title>Happy Birthday My Love Muhammad Rifky Abiyan!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style.css">
@@ -107,7 +107,7 @@
             <h1 class="aesthetic-font fade-in-text">Happy Birthday,<br>My Everything</h1>
             <p class="aesthetic-font fade-in-text"
                 style="font-size: 1.3rem; color: #1a3e5c; margin-top: -5px; margin-bottom: 10px; letter-spacing: 2px;">-
-                Natasya -</p>
+                Muhammad Rifky Abiyan -</p>
             <img src="img/foto-pacar.png" alt="Foto Pacar" class="birthday-photo fade-in-text" decoding="async">
             <p class="typing-text">selamat bertambah usia, cintaku. hari ini adalah tentang kamu, tentang semua kerja
                 perjalanan hidupmu, tawa mu, dan semua hal hebat yang sudah kamu lewati sampai detik ini.</p>
@@ -143,47 +143,483 @@
                 keadaanmu.</p>
         </section>
 
-        <section class="slide photo-panel show-on-scroll">
-            <h2 class="aesthetic-font"
-                style="line-height: 0.8; margin-bottom: -15px; position: relative; top: 15px; color: #8c1b44; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.8);">
-                <span style="font-size: 2em; display: block;">The little things</span>
-                <span
-                    style="font-size: 1.2em; display: block; opacity: 0.95; transform: translateX(40px); color: #0c2d47; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 8px rgba(255, 255, 255, 0.8); font-weight: 600;">i
-                    know about you</span>
+        <section class="slide photo-panel show-on-scroll little-things-section" id="little-things-section">
+            <h2 class="aesthetic-font lt-heading">
+                <span class="lt-heading-main">The little things</span>
+                <span class="lt-heading-sub">i know about you</span>
             </h2>
 
-            <div class="solar-system">
-                <div class="orbit-track">
+            <p class="lt-subtitle">Ketuk segel hati pada setiap kapsul untuk membuka rahasia kecil tentangmu ✨</p>
 
-                    <div class="planet-card item1" data-caption="Mie">
-                        <img src="img/favorite-food.jpg" alt="Food" loading="lazy" decoding="async">
-                        <p class="planet-caption">Your favorite food</p>
+            <!-- Baris Konstelasi 6 Kepingan + Progress -->
+            <div class="lt-constellation-wrap">
+                <div class="lt-constellation" role="tablist" aria-label="Pilih kepingan tentang Iky">
+                    <div class="lt-constellation-line">
+                        <div class="lt-constellation-line-fill" id="lt-line-fill"></div>
                     </div>
+                    <button type="button" class="lt-charm is-current" data-index="0"
+                        aria-label="Kepingan 1: Hal yang paling disukai">
+                        <span class="lt-charm-icon">🕰️</span>
+                        <span class="lt-charm-check">✦</span>
+                    </button>
+                    <button type="button" class="lt-charm" data-index="1"
+                        aria-label="Kepingan 2: Hal yang membuat bahagia">
+                        <span class="lt-charm-icon">🌤️</span>
+                        <span class="lt-charm-check">✦</span>
+                    </button>
+                    <button type="button" class="lt-charm" data-index="2" aria-label="Kepingan 3: Tempat ternyaman">
+                        <span class="lt-charm-icon">🏡</span>
+                        <span class="lt-charm-check">✦</span>
+                    </button>
+                    <button type="button" class="lt-charm" data-index="3" aria-label="Kepingan 4: Impian terbesar">
+                        <span class="lt-charm-icon">🌠</span>
+                        <span class="lt-charm-check">✦</span>
+                    </button>
+                    <button type="button" class="lt-charm" data-index="4"
+                        aria-label="Kepingan 5: Hal yang paling dibanggakan">
+                        <span class="lt-charm-icon">🌊</span>
+                        <span class="lt-charm-check">✦</span>
+                    </button>
+                    <button type="button" class="lt-charm" data-index="5" aria-label="Kepingan 6: Panggilan kesayangan">
+                        <span class="lt-charm-icon">🤍</span>
+                        <span class="lt-charm-check">✦</span>
+                    </button>
+                    <button type="button" class="lt-charm" data-index="6" aria-label="Kepingan 7: Your favorite person">
+                        <span class="lt-charm-icon">🫶</span>
+                        <span class="lt-charm-check">✦</span>
+                    </button>
+                </div>
 
-                    <div class="planet-card item2" data-caption="Jus Jeruk">
-                        <img src="img/favorite-drink.jpg" alt="Drink" loading="lazy" decoding="async">
-                        <p class="planet-caption">Your favorite drink</p>
+                <div class="lt-progress-pill" id="lt-progress-pill">
+                    <span class="lt-progress-sparkle">✨</span>
+                    <span id="lt-progress-text">0 / 7 kepingan terbuka</span>
+                </div>
+            </div>
+
+            <!-- MODE 1: Interactive 3D Sealed Keepsake Deck -->
+            <div class="lt-deck-wrapper" id="lt-deck-wrapper">
+                <div class="lt-deck-stage" id="lt-deck-stage">
+                    <div class="lt-burst-layer" id="lt-burst-layer"></div>
+
+                    <!-- Card 1 -->
+                    <article class="lt-card is-active" data-index="0" data-pos="0">
+                        <div class="lt-card-inner">
+                            <!-- Sisi Depan (Tersegel) -->
+                            <div class="lt-card-face lt-card-front">
+                                <div class="lt-envelope-flap"></div>
+                                <span class="lt-card-badge">Kepingan #01</span>
+                                <div class="lt-front-illustration">
+                                    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <circle cx="40" cy="40" r="30" stroke="currentColor" stroke-width="1.5"
+                                            stroke-dasharray="4 4" opacity="0.45" />
+                                        <path
+                                            d="M29 36C29 31.5 32.5 28 37 28C39.6 28 41.9 29.3 43.2 31.3C44.5 29.3 46.8 28 49.4 28C53.9 28 57.4 31.5 57.4 36C57.4 44.2 43.2 53 43.2 53C43.2 53 29 44.2 29 36Z"
+                                            fill="rgba(140, 27, 68, 0.16)" stroke="currentColor" stroke-width="2"
+                                            stroke-linejoin="round" />
+                                        <path d="M22 41C22 37.7 24.7 35 28 35C30 35 31.7 36 32.7 37.5"
+                                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                            opacity="0.7" />
+                                        <circle cx="58" cy="23" r="2.2" fill="currentColor" opacity="0.7" />
+                                        <circle cx="22" cy="26" r="1.8" fill="currentColor" opacity="0.5" />
+                                    </svg>
+                                </div>
+                                <h3 class="lt-front-question">Hal yang paling kamu sukai</h3>
+                                <div class="lt-wax-seal-wrap">
+                                    <div class="lt-wax-seal">
+                                        <span class="lt-wax-seal-heart">🤍</span>
+                                    </div>
+                                    <span class="lt-seal-hint">Ketuk segel untuk membuka</span>
+                                </div>
+                            </div>
+
+                            <!-- Sisi Belakang (Terbuka) -->
+                            <div class="lt-card-face lt-card-back">
+                                <div class="lt-back-top">
+                                    <span class="lt-back-tag">01 • Tentang Kesukaannya</span>
+                                    <span class="lt-back-mini-icon">🕰️</span>
+                                </div>
+                                <p class="lt-back-label">Hal yang paling kamu sukai</p>
+                                <div class="lt-back-divider"><span>✦</span></div>
+                                <p class="lt-back-answer">“Menghabiskan waktu bersama orang-orang tersayang”</p>
+                                <div class="lt-back-footer">
+                                    <button type="button" class="lt-heart-react-btn" data-react="🤍">
+                                        <span class="lt-react-icon">🤍</span> <span class="lt-react-count">Kirim
+                                            Cinta</span>
+                                    </button>
+                                    <button type="button" class="lt-next-chip">Selanjutnya →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="lt-card" data-index="1" data-pos="1">
+                        <div class="lt-card-inner">
+                            <div class="lt-card-face lt-card-front">
+                                <div class="lt-envelope-flap"></div>
+                                <span class="lt-card-badge">Kepingan #02</span>
+                                <div class="lt-front-illustration">
+                                    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <circle cx="40" cy="34" r="11" fill="rgba(245, 158, 11, 0.18)"
+                                            stroke="currentColor" stroke-width="2" />
+                                        <path
+                                            d="M40 16V20M40 48V52M22 34H26M54 34H58M27.3 21.3L30.1 24.1M49.9 43.9L52.7 46.7M52.7 21.3L49.9 24.1M30.1 43.9L27.3 46.7"
+                                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                                        <path d="M24 57C29 52 51 52 56 57" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" opacity="0.75" />
+                                    </svg>
+                                </div>
+                                <h3 class="lt-front-question">Hal yang paling membuatmu bahagia</h3>
+                                <div class="lt-wax-seal-wrap">
+                                    <div class="lt-wax-seal">
+                                        <span class="lt-wax-seal-heart">🤍</span>
+                                    </div>
+                                    <span class="lt-seal-hint">Ketuk segel untuk membuka</span>
+                                </div>
+                            </div>
+
+                            <div class="lt-card-face lt-card-back">
+                                <div class="lt-back-top">
+                                    <span class="lt-back-tag">02 • Sumber Bahagianya</span>
+                                    <span class="lt-back-mini-icon">🌤️</span>
+                                </div>
+                                <p class="lt-back-label">Hal yang paling membuatmu bahagia</p>
+                                <div class="lt-back-divider"><span>✦</span></div>
+                                <p class="lt-back-answer">“Bisa melihat keluarga dan orang-orang yang kamu sayangi
+                                    baik-baik saja”</p>
+                                <div class="lt-back-footer">
+                                    <button type="button" class="lt-heart-react-btn" data-react="🤍">
+                                        <span class="lt-react-icon">🤍</span> <span class="lt-react-count">Kirim
+                                            Cinta</span>
+                                    </button>
+                                    <button type="button" class="lt-next-chip">Selanjutnya →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="lt-card" data-index="2" data-pos="2">
+                        <div class="lt-card-inner">
+                            <div class="lt-card-face lt-card-front">
+                                <div class="lt-envelope-flap"></div>
+                                <span class="lt-card-badge">Kepingan #03</span>
+                                <div class="lt-front-illustration">
+                                    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <path d="M22 40L40 24L58 40" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M27 37V55H53V37" fill="rgba(56, 163, 199, 0.14)" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M36 44C36 42.2 37.5 40.8 39.2 40.8C40.1 40.8 40.9 41.3 41.4 42C41.9 41.3 42.7 40.8 43.6 40.8C45.3 40.8 46.8 42.2 46.8 44C46.8 47.1 41.4 50.5 41.4 50.5C41.4 50.5 36 47.1 36 44Z"
+                                            fill="currentColor" opacity="0.75" />
+                                    </svg>
+                                </div>
+                                <h3 class="lt-front-question">Tempat ternyamanmu</h3>
+                                <div class="lt-wax-seal-wrap">
+                                    <div class="lt-wax-seal">
+                                        <span class="lt-wax-seal-heart">🤍</span>
+                                    </div>
+                                    <span class="lt-seal-hint">Ketuk segel untuk membuka</span>
+                                </div>
+                            </div>
+
+                            <div class="lt-card-face lt-card-back">
+                                <div class="lt-back-top">
+                                    <span class="lt-back-tag">03 • Ruang Pulangnya</span>
+                                    <span class="lt-back-mini-icon">🏡</span>
+                                </div>
+                                <p class="lt-back-label">Tempat ternyamanmu</p>
+                                <div class="lt-back-divider"><span>✦</span></div>
+                                <p class="lt-back-answer">“Tempat di mana kamu bisa menjadi dirimu sendiri dan bercerita
+                                    tanpa takut dihakimi”</p>
+                                <div class="lt-back-footer">
+                                    <button type="button" class="lt-heart-react-btn" data-react="🤍">
+                                        <span class="lt-react-icon">🤍</span> <span class="lt-react-count">Kirim
+                                            Cinta</span>
+                                    </button>
+                                    <button type="button" class="lt-next-chip">Selanjutnya →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article class="lt-card" data-index="3" data-pos="hidden">
+                        <div class="lt-card-inner">
+                            <div class="lt-card-face lt-card-front">
+                                <div class="lt-envelope-flap"></div>
+                                <span class="lt-card-badge">Kepingan #04</span>
+                                <div class="lt-front-illustration">
+                                    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <path
+                                            d="M44 20L47.5 30.5L58 34L47.5 37.5L44 48L40.5 37.5L30 34L40.5 30.5L44 20Z"
+                                            fill="rgba(234, 179, 8, 0.2)" stroke="currentColor" stroke-width="2"
+                                            stroke-linejoin="round" />
+                                        <path d="M21 56C27 49 34 45 42 44" stroke="currentColor" stroke-width="1.8"
+                                            stroke-linecap="round" stroke-dasharray="3 3" />
+                                        <circle cx="24" cy="27" r="2" fill="currentColor" opacity="0.6" />
+                                        <circle cx="56" cy="52" r="2.3" fill="currentColor" opacity="0.7" />
+                                    </svg>
+                                </div>
+                                <h3 class="lt-front-question">Impian terbesarmu</h3>
+                                <div class="lt-wax-seal-wrap">
+                                    <div class="lt-wax-seal">
+                                        <span class="lt-wax-seal-heart">🤍</span>
+                                    </div>
+                                    <span class="lt-seal-hint">Ketuk segel untuk membuka</span>
+                                </div>
+                            </div>
+
+                            <div class="lt-card-face lt-card-back">
+                                <div class="lt-back-top">
+                                    <span class="lt-back-tag">04 • Harapan &amp; Masa Depan</span>
+                                    <span class="lt-back-mini-icon">🌠</span>
+                                </div>
+                                <p class="lt-back-label">Impian terbesarmu</p>
+                                <div class="lt-back-divider"><span>✦</span></div>
+                                <p class="lt-back-answer">“Memiliki kehidupan yang lebih baik dan bisa membahagiakan
+                                    keluarga”</p>
+                                <div class="lt-back-footer">
+                                    <button type="button" class="lt-heart-react-btn" data-react="🤍">
+                                        <span class="lt-react-icon">🤍</span> <span class="lt-react-count">Kirim
+                                            Cinta</span>
+                                    </button>
+                                    <button type="button" class="lt-next-chip">Selanjutnya →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 5 -->
+                    <article class="lt-card" data-index="4" data-pos="hidden">
+                        <div class="lt-card-inner">
+                            <div class="lt-card-face lt-card-front">
+                                <div class="lt-envelope-flap"></div>
+                                <span class="lt-card-badge">Kepingan #05</span>
+                                <div class="lt-front-illustration">
+                                    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <path
+                                            d="M40 20L54 27V39C54 48.5 47.8 56.8 40 60C32.2 56.8 26 48.5 26 39V27L40 20Z"
+                                            fill="rgba(140, 27, 68, 0.14)" stroke="currentColor" stroke-width="2"
+                                            stroke-linejoin="round" />
+                                        <path d="M35 39L38.8 42.8L46.5 35" stroke="currentColor" stroke-width="2.2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <h3 class="lt-front-question">Hal yang paling aku banggakan terhadap sosokmu</h3>
+                                <div class="lt-wax-seal-wrap">
+                                    <div class="lt-wax-seal">
+                                        <span class="lt-wax-seal-heart">🤍</span>
+                                    </div>
+                                    <span class="lt-seal-hint">Ketuk segel untuk membuka</span>
+                                </div>
+                            </div>
+
+                            <div class="lt-card-face lt-card-back">
+                                <div class="lt-back-top">
+                                    <span class="lt-back-tag">05 • Kebanggaanku</span>
+                                    <span class="lt-back-mini-icon">🌊</span>
+                                </div>
+                                <p class="lt-back-label">Hal yang paling aku banggakan terhadap sosokmu</p>
+                                <div class="lt-back-divider"><span>✦</span></div>
+                                <p class="lt-back-answer">“Kemampuanmu bertahan dan terus berusaha meskipun banyak hal
+                                    yang tidak mudah”</p>
+                                <div class="lt-back-footer">
+                                    <button type="button" class="lt-heart-react-btn" data-react="🤍">
+                                        <span class="lt-react-icon">🤍</span> <span class="lt-react-count">Kirim
+                                            Cinta</span>
+                                    </button>
+                                    <button type="button" class="lt-next-chip">Selanjutnya →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 6 (Panggilan Kesayangan: Iky🤍) -->
+                    <article class="lt-card lt-card-special" data-index="5" data-pos="hidden">
+                        <div class="lt-card-inner">
+                            <div class="lt-card-face lt-card-front">
+                                <div class="lt-envelope-flap"></div>
+                                <span class="lt-card-badge">Kepingan #06</span>
+                                <div class="lt-front-illustration">
+                                    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <circle cx="40" cy="40" r="28" stroke="currentColor" stroke-width="1.5"
+                                            opacity="0.35" />
+                                        <path
+                                            d="M25 35.5C25 29.7 29.7 25 35.5 25C38.9 25 41.9 26.6 43.8 29.2C45.7 26.6 48.7 25 52.1 25C57.9 25 62.6 29.7 62.6 35.5C62.6 46.2 43.8 57.5 43.8 57.5C43.8 57.5 25 46.2 25 35.5Z"
+                                            transform="translate(-3.8, -1)" fill="rgba(255, 182, 193, 0.35)"
+                                            stroke="currentColor" stroke-width="2" />
+                                    </svg>
+                                </div>
+                                <h3 class="lt-front-question">Panggilan kesayangan</h3>
+                                <div class="lt-wax-seal-wrap">
+                                    <div class="lt-wax-seal">
+                                        <span class="lt-wax-seal-heart">🤍</span>
+                                    </div>
+                                    <span class="lt-seal-hint">Ketuk segel untuk membuka</span>
+                                </div>
+                            </div>
+
+                            <div class="lt-card-face lt-card-back lt-back-special">
+                                <div class="lt-back-top">
+                                    <span class="lt-back-tag">06 • My Favorite Call</span>
+                                    <span class="lt-back-mini-icon">💌</span>
+                                </div>
+                                <p class="lt-back-label">Panggilan kesayangan</p>
+                                <div class="lt-nickname-halo">
+                                    <span class="lt-nickname-text aesthetic-font">Iky🤍</span>
+                                </div>
+                                <p class="lt-nickname-note">Satu nama yang selalu punya tempat paling hangat di hatiku.
+                                </p>
+                                <div class="lt-back-footer">
+                                    <button type="button" class="lt-heart-react-btn" data-react="🤍">
+                                        <span class="lt-react-icon">🤍</span> <span class="lt-react-count">Kirim
+                                            Cinta</span>
+                                    </button>
+                                    <button type="button" class="lt-next-chip">Selanjutnya →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Card 7 (Special Finale: Your favorite person) -->
+                    <article class="lt-card lt-card-special lt-card-photo" data-index="6" data-pos="hidden">
+                        <div class="lt-card-inner">
+                            <div class="lt-card-face lt-card-front">
+                                <div class="lt-envelope-flap"></div>
+                                <span class="lt-card-badge lt-badge-special">Kepingan Terakhir #07</span>
+                                <div class="lt-front-illustration">
+                                    <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+                                        <rect x="20" y="23" width="40" height="34" rx="8"
+                                            fill="rgba(255, 182, 193, 0.25)" stroke="currentColor" stroke-width="2" />
+                                        <circle cx="40" cy="40" r="10" stroke="currentColor" stroke-width="2" />
+                                        <path
+                                            d="M36.5 39.2C36.5 37.8 37.6 36.7 39 36.7C39.8 36.7 40.5 37.1 40.9 37.7C41.3 37.1 42 36.7 42.8 36.7C44.2 36.7 45.3 37.8 45.3 39.2C45.3 41.7 40.9 44.3 40.9 44.3C40.9 44.3 36.5 41.7 36.5 39.2Z"
+                                            transform="translate(-0.9, 0)" fill="currentColor" />
+                                        <circle cx="52" cy="30" r="2" fill="currentColor" />
+                                    </svg>
+                                </div>
+                                <h3 class="lt-front-question">Your favorite person</h3>
+                                <div class="lt-wax-seal-wrap">
+                                    <div class="lt-wax-seal lt-wax-seal-special">
+                                        <span class="lt-wax-seal-heart">🤍</span>
+                                    </div>
+                                    <span class="lt-seal-hint">Ketuk segel terakhir ✨</span>
+                                </div>
+                            </div>
+
+                            <div class="lt-card-face lt-card-back lt-back-photo">
+                                <div class="lt-back-top">
+                                    <span class="lt-back-tag">07 • Spesial Untukmu</span>
+                                    <span class="lt-back-mini-icon">🫶</span>
+                                </div>
+                                <div class="lt-fav-photo-wrap" data-lightbox-src="img/your-favorite-person.jpg"
+                                    data-lightbox-caption="Your favorite person 🤍">
+                                    <img src="img/your-favorite-person.jpg" alt="Your favorite person"
+                                        class="lt-fav-photo" loading="lazy" decoding="async">
+                                    <span class="lt-photo-zoom-hint">🔍 Ketuk foto</span>
+                                </div>
+                                <p class="lt-photo-caption aesthetic-font">Your favorite person</p>
+                                <div class="lt-back-footer lt-footer-center">
+                                    <button type="button" class="lt-heart-react-btn lt-hug-btn" data-react="🤍">
+                                        <span class="lt-react-icon">🤍</span> <span class="lt-react-count">Hujani
+                                            dengan 🤍</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Navigasi Bawah Deck -->
+                <div class="lt-deck-controls">
+                    <button type="button" class="lt-nav-btn" id="lt-prev-btn"
+                        aria-label="Kepingan sebelumnya">‹</button>
+                    <span class="lt-Swipe-indicator" id="lt-step-indicator">1 / 7 • Ketuk segel untuk buka</span>
+                    <button type="button" class="lt-nav-btn" id="lt-next-btn"
+                        aria-label="Kepingan selanjutnya">›</button>
+                </div>
+            </div>
+
+            <!-- Tombol Buka Ringkasan Semua Kepingan (Muncul saat semua terbuka / bisa di-toggle) -->
+            <div class="lt-view-toggle-wrap" id="lt-view-toggle-wrap">
+                <button type="button" class="lt-view-toggle-btn" id="lt-view-toggle-btn">
+                    📖 Lihat Semua Kepingan Sekaligus
+                </button>
+            </div>
+
+            <!-- MODE 2: Bento Keepsake Summary Grid (Seluruh 6 Kepingan Terbuka) -->
+            <div class="lt-summary-grid hidden-view" id="lt-summary-grid">
+                <div class="lt-bento-card">
+                    <div class="lt-bento-header">
+                        <span class="lt-bento-num">01</span>
+                        <span class="lt-bento-emoji">🕰️</span>
                     </div>
+                    <h4 class="lt-bento-q">Hal yang paling dia sukai</h4>
+                    <p class="lt-bento-a">Menghabiskan waktu bersama orang-orang tersayang</p>
+                </div>
 
-                    <div class="planet-card item3"
-                        data-embed="https://open.spotify.com/embed/track/0PtJbtW50jcvvswNPn3QGd?utm_source=generator&si=cee36bcb9e664a9c"
-                        data-caption="Sadrah - For Revenge">
-                        <img src="img/favorite-song.jpg" alt="Song" loading="lazy" decoding="async">
-                        <p class="planet-caption">Your favorite song</p>
+                <div class="lt-bento-card">
+                    <div class="lt-bento-header">
+                        <span class="lt-bento-num">02</span>
+                        <span class="lt-bento-emoji">🌤️</span>
                     </div>
+                    <h4 class="lt-bento-q">Hal yang paling membuatnya bahagia</h4>
+                    <p class="lt-bento-a">Bisa melihat keluarga dan orang-orang yang dia sayangi baik-baik saja</p>
+                </div>
 
-                    <div class="planet-card item4" data-caption="Marvel">
-                        <img src="img/favorite-person.jpeg" alt="Person" loading="lazy" decoding="async">
-                        <p class="planet-caption">Your favorite person</p>
+                <div class="lt-bento-card">
+                    <div class="lt-bento-header">
+                        <span class="lt-bento-num">03</span>
+                        <span class="lt-bento-emoji">🏡</span>
                     </div>
+                    <h4 class="lt-bento-q">Tempat ternyaman</h4>
+                    <p class="lt-bento-a">Tempat di mana dia bisa menjadi dirinya sendiri dan bercerita tanpa takut
+                        dihakimi</p>
+                </div>
 
-                    <div class="planet-card item5"
-                        data-embed="https://www.youtube.com/embed/rsxEn8hu_Ss?si=0inXSVYK5RO59-xg"
-                        data-caption="Dasi Gantung">
-                        <img src="img/favorite-yt.jpg" alt="YouTube" loading="lazy" decoding="async">
-                        <p class="planet-caption">Your favorite youtube channel</p>
+                <div class="lt-bento-card">
+                    <div class="lt-bento-header">
+                        <span class="lt-bento-num">04</span>
+                        <span class="lt-bento-emoji">🌠</span>
                     </div>
+                    <h4 class="lt-bento-q">Impian terbesarnya</h4>
+                    <p class="lt-bento-a">Memiliki kehidupan yang lebih baik dan bisa membahagiakan keluarga</p>
+                </div>
 
+                <div class="lt-bento-card lt-bento-wide">
+                    <div class="lt-bento-header">
+                        <span class="lt-bento-num">05</span>
+                        <span class="lt-bento-emoji">🌊</span>
+                    </div>
+                    <h4 class="lt-bento-q">Hal yang paling aku banggakan terhadap sosoknya</h4>
+                    <p class="lt-bento-a">Kemampuannya bertahan dan terus berusaha meskipun banyak hal yang tidak mudah
+                    </p>
+                </div>
+
+                <div class="lt-bento-card lt-bento-wide lt-bento-special" id="lt-bento-iky-card">
+                    <div class="lt-bento-header">
+                        <span class="lt-bento-num">06 • Kesayanganku</span>
+                        <span class="lt-bento-emoji">💌</span>
+                    </div>
+                    <h4 class="lt-bento-q">Panggilan kesayangan</h4>
+                    <p class="lt-bento-iky aesthetic-font">Iky🤍</p>
+                    <span class="lt-bento-tap-note">Ketuk kartu ini untuk hujan 🤍</span>
+                </div>
+
+                <div class="lt-bento-card lt-bento-wide lt-bento-photo-card">
+                    <div class="lt-bento-header">
+                        <span class="lt-bento-num">07 • Spesial Untukmu</span>
+                        <span class="lt-bento-emoji">🫶</span>
+                    </div>
+                    <div class="lt-bento-photo-wrap" data-lightbox-src="img/your-favorite-person.jpg"
+                        data-lightbox-caption="Your favorite person 🤍">
+                        <img src="img/your-favorite-person.jpg" alt="Your favorite person" class="lt-bento-photo"
+                            loading="lazy" decoding="async">
+                    </div>
+                    <p class="lt-bento-photo-caption aesthetic-font">Your favorite person</p>
+                    <span class="lt-bento-tap-note">Ketuk foto untuk memperbesar 🔍</span>
                 </div>
             </div>
         </section>
@@ -191,10 +627,10 @@
         <section class="slide photo-panel show-on-scroll">
             <h2 class="aesthetic-font"
                 style="line-height: 0.8; margin-bottom: 35px; color: #8c1b44; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 12px rgba(255, 255, 255, 0.8);">
-                <span style="font-size: 2em; display: block;">The Most</span>
+                <span style="font-size: 2em; display: block;">Favorite Frame</span>
                 <span
-                    style="font-size: 1.2em; display: block; opacity: 0.95; transform: translateX(40px); color: #0c2d47; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 8px rgba(255, 255, 255, 0.8); font-weight: 600;">Beautiful
-                    Girl</span>
+                    style="font-size: 1.2em; display: block; opacity: 0.95; transform: translateX(40px); color: #0c2d47; text-shadow: 0 1px 3px rgba(255, 255, 255, 0.95), 0 0 8px rgba(255, 255, 255, 0.8); font-weight: 600;">Of
+                    Us</span>
             </h2>
             <div class="gallery-scroll">
                 <div class="scratch-card">
@@ -211,14 +647,6 @@
                 </div>
                 <div class="scratch-card">
                     <img src="img/4.jpeg" alt="Kenangan 4" loading="lazy" decoding="async">
-                    <canvas class="scratch-canvas"></canvas>
-                </div>
-                <div class="scratch-card">
-                    <img src="img/5.jpeg" alt="Kenangan 5" loading="lazy" decoding="async">
-                    <canvas class="scratch-canvas"></canvas>
-                </div>
-                <div class="scratch-card">
-                    <img src="img/6.jpeg" alt="Kenangan 6" loading="lazy" decoding="async">
                     <canvas class="scratch-canvas"></canvas>
                 </div>
             </div>
@@ -255,26 +683,22 @@
             <h1 class="aesthetic-font">You Are My Universe</h1>
 
             <p class="typing-text" style="margin-top: 25px; margin-bottom: 15px;">
-                Mungkin sekarang kita cuma bisa saling jagain lewat doa, chat, dan telepon. Tapi buat aku, itu udah
-                cukup buat ngebuktiin kalau jarak cuma misahin tempat, bukan rasa. Makasih ya udah tetap bertahan, terus
-                tumbuh, dan selalu milih buat tetap sama aku.
+                Setiap detik bersamamu adalah kebahagiaan yang tidak akan pernah aku tukar dengan apa pun. Terima kasih
+                sudah bertahan, bertumbuh, dan selalu bersinar bersamaku sejauh ini.
             </p>
 
             <p class="typing-text" style="margin-bottom: 40px;">
-                Di hari spesial kamu ini, aku cuma pengen kamu tahu kalau kamu itu berharga banget, lebih dari yang kamu
-                kira. Tetap jadi diri kamu yang selalu baik, hangat, dan bikin aku jatuh cinta berkali-kali. Walaupun
-                sekarang kita lagi dipisahin jarak, rasa bangga dan sayangku ke kamu nggak pernah berkurang sedikit pun.
-                Aku bakal tetap ada, nemenin, dukung, dan nyayangin kamu di setiap proses yang kamu lewatin. Happy
-                birthday, my favorite person. Semoga kita bisa segera ngerayain hari spesial kamu tanpa dipisahin layar
-                lagi. sejuta doa, sejuta harapan, sejuta makasih dan sejuta maaf untuk kesayangankuu be happy my love, i
-                love you so muchhh sayangkuu. 🤍
+                Di hari spesialmu ini, aku hanya ingin kamu tahu bahwa kamu sangat amat berharga. Tetaplah menjadi
+                dirimu yang hangat dan luar biasa. Aku akan selalu ada di sini, mendukung dan mencintaimu dalam setiap
+                fase hidupmu. Selamat bertambah usia, satu-satunya duniaku. 🤍
             </p>
 
             <hr style="border: 0; border-top: 1px solid rgba(140, 27, 68, 0.25); margin-bottom: 20px;">
             <p style="font-size: 0.95rem; opacity: 0.85; margin-bottom: 5px; color: #1a3e5c;">Dari orang yang paling
                 bersyukur memilikimu,
             </p>
-            <p class="sender-name aesthetic-font baby-pink-text" style="font-size: 2rem; margin-top: 5px;">Marvel</p>
+            <p class="sender-name aesthetic-font baby-pink-text" style="font-size: 2rem; margin-top: 5px;">Rahma Amalia
+                Rosa</p>
 
             <!-- Tombol Tiup Lilin -->
             <button id="btn-tiup-lilin" class="btn-tiup-lilin" onclick="bukaHalamanLilin()">🎂 Tiup Lilin</button>
@@ -297,7 +721,7 @@
                                 <div class="flame-inner"></div>
                             </div>
                             <div class="candle-number-body">
-                                <span class="candle-digit">1</span>
+                                <span class="candle-digit">2</span>
                             </div>
                         </div>
                         <!-- Angka 4 -->
@@ -306,7 +730,7 @@
                                 <div class="flame-inner"></div>
                             </div>
                             <div class="candle-number-body">
-                                <span class="candle-digit">4</span>
+                                <span class="candle-digit">9</span>
                             </div>
                         </div>
                     </div>
